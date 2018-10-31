@@ -107,3 +107,39 @@ console.log(
         add
     )
 );
+
+console.clear();
+
+// 11. pipe
+let f1 = fp.pipe(
+    function(a) { return a + 1; },
+    function(a) { return a * 2; },
+    function(a) { return a * a;})
+
+console.log(f1(1));
+
+// 12. go
+
+fp.go(1,
+    function(a) { return a + 1; },
+    function(a) { return a * 2; },
+    function(a) { return a * a; },
+    console.log);
+
+// go, filter, map, get
+
+fp.go(users,
+    fp.filter(user => user.age <30),
+    fp.map(fp.get('name')),
+    console.log)
+
+
+
+// 화살표 함수 간단히
+
+let a = function(user) { return users.age > 30; };
+let b = user => user.age > 30 ;
+
+let add1 = function(a, b) { return a + b; };
+let add2 = (a, b) => a + b;
+let add3 = (a, b) => ({ val : a + b });

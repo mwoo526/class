@@ -88,6 +88,21 @@ function reduce(list, iter, memo){
     return memo;
 }
 
+// 11. pipe
+function pipe() {
+    let fns = arguments;
+    return function(arg) {
+        return reduce(fns, function(arg, fn){
+            return fn(arg);
+        }, arg);
+    }
+}
 
 
-module.exports = { curry, curryr, get, isObject, key, each, filter, map , rest, reduce};
+// 12. go
+function go(arg) {
+    let fns = rest(arguments);
+    return pipe.apply(null, fns)(arg);
+}
+
+module.exports = { curry, curryr, get, isObject, key, each, filter, map , rest, reduce, pipe, go};
